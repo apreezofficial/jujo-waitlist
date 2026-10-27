@@ -26,7 +26,7 @@ export async function getWaitlistSubmissions() {
   }
 
   const response = await fetch(
-    `https://staging.proforms.top/v1/forms/${encodeURIComponent(
+    `https://staging.proforms.top/forms/${encodeURIComponent(
       formKey
     )}/submissions?page=1&limit=100`,
     {
