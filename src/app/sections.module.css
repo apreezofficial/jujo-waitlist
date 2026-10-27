@@ -256,3 +256,12 @@
     grid-template-columns: 1fr;
   }
 }
+.ctaLogo {
+  display: grid;
+  place-items: center;
+  width: 82px;
+  height: 82px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+}
