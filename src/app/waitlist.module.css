@@ -665,3 +665,34 @@
     transition: none;
   }
 }
+.form {
+  max-width: 520px;
+  margin-top: 40px;
+}
+
+.field {
+  padding: 10px;
+  gap: 10px;
+}
+
+.field input[type='email'] {
+  height: 52px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+.field button {
+  height: 52px;
+  padding: 0 28px;
+}
+
+@media (max-width: 540px) {
+  .field {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .field input[type='email'] {
+    flex: none;
+  }
+}
