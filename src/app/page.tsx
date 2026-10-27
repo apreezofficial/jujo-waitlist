@@ -163,6 +163,22 @@ export default function WaitlistPage() {
         <div className={styles.grain} />
       </div>
       <Crystal />
+      <div className={styles.floaters} aria-hidden="true">
+        <span className={styles.shard} style={{ ['--l' as string]: '8%', ['--t' as string]: '18%', ['--s' as string]: '54px', ['--d' as string]: '0s', ['--v' as string]: '9s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '86%', ['--t' as string]: '14%', ['--s' as string]: '38px', ['--d' as string]: '1.2s', ['--v' as string]: '11s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '16%', ['--t' as string]: '62%', ['--s' as string]: '34px', ['--d' as string]: '0.6s', ['--v' as string]: '10s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '80%', ['--t' as string]: '58%', ['--s' as string]: '62px', ['--d' as string]: '2s', ['--v' as string]: '12s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '48%', ['--t' as string]: '8%', ['--s' as string]: '26px', ['--d' as string]: '1.6s', ['--v' as string]: '8s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '92%', ['--t' as string]: '38%', ['--s' as string]: '22px', ['--d' as string]: '0.3s', ['--v' as string]: '7s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '4%', ['--t' as string]: '40%', ['--s' as string]: '24px', ['--d' as string]: '2.4s', ['--v' as string]: '9s' }} />
+        <span className={styles.shard} style={{ ['--l' as string]: '64%', ['--t' as string]: '80%', ['--s' as string]: '30px', ['--d' as string]: '1s', ['--v' as string]: '10s' }} />
+        <i className={styles.spark} style={{ ['--l' as string]: '22%', ['--t' as string]: '30%', ['--d' as string]: '0s' }}>✦</i>
+        <i className={styles.spark} style={{ ['--l' as string]: '74%', ['--t' as string]: '26%', ['--d' as string]: '0.8s' }}>✦</i>
+        <i className={styles.spark} style={{ ['--l' as string]: '34%', ['--t' as string]: '78%', ['--d' as string]: '1.5s' }}>✦</i>
+        <i className={styles.spark} style={{ ['--l' as string]: '70%', ['--t' as string]: '70%', ['--d' as string]: '0.4s' }}>✦</i>
+        <i className={styles.spark} style={{ ['--l' as string]: '12%', ['--t' as string]: '84%', ['--d' as string]: '1.1s' }}>✦</i>
+        <i className={styles.spark} style={{ ['--l' as string]: '90%', ['--t' as string]: '82%', ['--d' as string]: '1.9s' }}>✦</i>
+      </div>
 
       <header className={styles.top}>
         <Link href="/" className={styles.brand} aria-label="Jujo home">
