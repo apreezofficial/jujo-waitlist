@@ -20,12 +20,6 @@ const icon = (children: ReactNode) => (
   </svg>
 );
 
-const PAIN = [
-  'You post, people like it, and nobody buys.',
-  'Messages pile up while you are busy running your business.',
-  'Agencies and creators cost a lot, and you still cannot tell what works.',
-];
-
 const FEATURES: {
   title: string;
   text: string;
@@ -180,25 +174,6 @@ export default function Sections() {
           businesses create campaigns, manage customers and turn more
           interest into sales.
         </p>
-      </section>
-
-      <section className={styles.block}>
-        <h2 className={styles.h2} data-reveal>
-          Sound familiar?
-        </h2>
-
-        <ul className={styles.pain}>
-          {PAIN.map((point, index) => (
-            <li
-              key={point}
-              data-reveal
-              style={{ ['--i' as string]: index }}
-            >
-              <span className={styles.dot} aria-hidden="true" />
-              {point}
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className={styles.block}>
