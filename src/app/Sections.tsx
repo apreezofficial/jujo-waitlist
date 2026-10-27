@@ -168,7 +168,7 @@ export default function Sections() {
           <Image src="/jujo-mark.png" alt="" width={26} height={22} style={{ width: 26, height: 'auto' }} />
           © 2026 Jujo
         </span>
-        <a href="mailto:Hello@jujo.ng">Hello@jujo.ng</a>
+        <a href="mailto:support@getjujo.com">support@getjujo.com</a>
       </footer>
     </div>
   );
