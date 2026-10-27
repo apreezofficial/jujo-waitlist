@@ -16,22 +16,22 @@ type VoieformResponse = {
 };
 
 export async function getWaitlistSubmissions() {
-  const secretKey = process.env.VOIEFORM_SECRET_KEY;
-  const formId = process.env.VOIEFORM_FORM_ID;
+  const accessKey = process.env.VOIEFORM_ACCESS_KEY;
+  const formKey = process.env.VOIEFORM_FORM_KEY;
 
-  if (!secretKey || !formId) {
+  if (!accessKey || !formKey) {
     throw new Error(
-      'Add VOIEFORM_SECRET_KEY and VOIEFORM_FORM_ID in Vercel Environment Variables.'
+      'Add VOIEFORM_ACCESS_KEY and VOIEFORM_FORM_KEY in Vercel Environment Variables.'
     );
   }
 
   const response = await fetch(
     `https://api.voieform.com/v1/forms/${encodeURIComponent(
-      formId
-    )}/submissions?page=1&limit=100&status=verified`,
+      formKey
+    )}/submissions?page=1&limit=100`,
     {
       headers: {
-        Authorization: `Bearer ${secretKey}`,
+        Authorization: `Bearer ${accessKey}`,
         Accept: 'application/json',
       },
       cache: 'no-store',
@@ -39,7 +39,9 @@ export async function getWaitlistSubmissions() {
   );
 
   if (!response.ok) {
-    throw new Error(`Voieform request failed with status ${response.status}.`);
+    throw new Error(
+      `Voieform could not load submissions. Status: ${response.status}`
+    );
   }
 
   const data = (await response.json()) as VoieformResponse;
