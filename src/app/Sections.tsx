@@ -212,13 +212,15 @@ export default function Sections() {
 
       <section className={`${styles.block} ${styles.cta}`}>
         <div className={styles.ctaCard} data-reveal>
-          <Image
-            src="/jujo-mark.png"
-            alt="Jujo"
-            width={56}
-            height={48}
-            style={{ width: 56, height: 'auto' }}
-          />
+          <div className={styles.ctaLogo}>
+  <Image
+    src="/jujo-mark.png"
+    alt="Jujo"
+    width={56}
+    height={48}
+    style={{ width: 56, height: 'auto' }}
+  />
+</div>
 
           <h2 className={styles.h2} style={{ color: '#fff' }}>
             Don&apos;t miss out
