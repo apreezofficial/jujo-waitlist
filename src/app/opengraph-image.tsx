@@ -5,8 +5,13 @@ import { join } from 'node:path';
 export const runtime = 'nodejs';
 
 export const alt =
-  'Jujo – sell more without big ad budgets. Join the waitlist.';
-export const size = { width: 1200, height: 630 };
+  'Jujo AI helps businesses grow their socials and turn leads into sales.';
+
+export const size = {
+  width: 1200,
+  height: 630,
+};
+
 export const contentType = 'image/png';
 
 export default async function OpenGraphImage() {
@@ -23,50 +28,147 @@ export default async function OpenGraphImage() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: 80,
+          position: 'relative',
+          overflow: 'hidden',
+          padding: '64px 76px',
           background:
-            'linear-gradient(135deg, #eaf6ff 0%, #bfe0ff 55%, #5eaeff 100%)',
-          color: '#0f1a24',
+            'linear-gradient(135deg, #effcf4 0%, #d9f5e4 48%, #9ee3b7 100%)',
+          color: '#063b29',
           fontFamily: 'sans-serif',
         }}
       >
+        {/* Decorative green shapes */}
         <div
           style={{
+            position: 'absolute',
+            width: 520,
+            height: 520,
+            right: -160,
+            top: -170,
+            borderRadius: '50%',
+            background: 'rgba(0, 150, 73, 0.16)',
+          }}
+        />
+
+        <div
+          style={{
+            position: 'absolute',
+            width: 360,
+            height: 360,
+            right: 80,
+            bottom: -250,
+            borderRadius: '50%',
+            background: 'rgba(0, 107, 56, 0.14)',
+          }}
+        />
+
+        <div
+          style={{
+            position: 'absolute',
+            width: 14,
+            height: 760,
+            left: 900,
+            top: -80,
+            borderRadius: 20,
+            background: 'rgba(255, 255, 255, 0.42)',
+            transform: 'rotate(22deg)',
+          }}
+        />
+
+        <div
+          style={{
+            position: 'relative',
             display: 'flex',
-            alignItems: 'center',
-            gap: 16,
-            marginBottom: 36,
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            width: '100%',
           }}
         >
-          <img src={logoSrc} width={72} height={62} alt="" />
-          <div style={{ fontSize: 36, fontWeight: 700 }}>
-            Jujo
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+            }}
+          >
+            <img src={logoSrc} width={62} height={54} alt="" />
+
+            <div
+              style={{
+                fontSize: 34,
+                fontWeight: 800,
+                letterSpacing: -1,
+              }}
+            >
+              Jujo
+            </div>
+
+            <div
+              style={{
+                marginLeft: 8,
+                padding: '8px 14px',
+                borderRadius: 999,
+                background: 'rgba(255, 255, 255, 0.68)',
+                color: '#007c3e',
+                fontSize: 17,
+                fontWeight: 700,
+              }}
+            >
+              AI for business
+            </div>
           </div>
-        </div>
 
-        <div
-          style={{
-            fontSize: 74,
-            fontWeight: 800,
-            lineHeight: 1.04,
-            letterSpacing: -2,
-            maxWidth: 960,
-          }}
-        >
-          Growth is coming. Built for Nigerian businesses.
-        </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              maxWidth: 880,
+            }}
+          >
+            <div
+              style={{
+                fontSize: 74,
+                fontWeight: 800,
+                lineHeight: 1.03,
+                letterSpacing: -3,
+              }}
+            >
+              Grow your socials.
+              <br />
+              Turn leads into sales.
+            </div>
 
-        <div
-          style={{
-            fontSize: 30,
-            marginTop: 28,
-            color: '#334155',
-            maxWidth: 900,
-          }}
-        >
-          Join the waitlist and be first to try Jujo.
+            <div
+              style={{
+                display: 'flex',
+                maxWidth: 820,
+                marginTop: 28,
+                color: '#285843',
+                fontSize: 27,
+                lineHeight: 1.35,
+              }}
+            >
+              Jujo AI is your professional business assistant, helping you
+              grow online and convert more customers without disrupting how
+              your business works.
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              alignSelf: 'flex-start',
+              padding: '15px 24px',
+              borderRadius: 999,
+              background: '#063b29',
+              color: '#ffffff',
+              fontSize: 22,
+              fontWeight: 700,
+            }}
+          >
+            Join the waitlist
+          </div>
         </div>
       </div>
     ),
