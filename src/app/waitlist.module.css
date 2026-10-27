@@ -1,4 +1,4 @@
-/* ===== Waitlist: ice-blue glass flutes, a floating crystal and a soft glow ===== */
+/* ===== Waitlist: Jujo green glass flutes, floating crystal and soft glow ===== */
 
 .page {
   --mx: 0;
@@ -10,8 +10,8 @@
   align-items: center;
   overflow: hidden;
   isolation: isolate;
-  background: #e9f5ff;
-  color: #0f1a24;
+  background: #eaf8f0;
+  color: #063b29;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
@@ -24,20 +24,18 @@
   pointer-events: none;
 }
 
-/* Vertical glass ribs. Two layers drift at different speeds so the light seems to move through them. */
 .flutes {
   position: absolute;
   left: -10%;
   right: -10%;
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.85) 0,
-      rgba(168, 214, 255, 0.55) 1.6%,
-      rgba(47, 123, 255, 0.78) 3.2%,
-      rgba(110, 176, 255, 0.5) 4.6%,
-      rgba(255, 255, 255, 0.8) 6%
-    );
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.85) 0,
+    rgba(170, 235, 196, 0.55) 1.6%,
+    rgba(0, 142, 74, 0.68) 3.2%,
+    rgba(82, 190, 125, 0.5) 4.6%,
+    rgba(255, 255, 255, 0.8) 6%
+  );
   background-size: 6vw 100%;
   filter: blur(0.4px) saturate(1.1);
   animation: flute-drift 26s linear infinite;
@@ -47,8 +45,18 @@
 .flutesTop {
   top: -6%;
   height: 46%;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.55) 45%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    transparent 100%
+  );
 }
 
 .flutesBottom {
@@ -57,20 +65,30 @@
   background-size: 8vw 100%;
   animation-duration: 38s;
   animation-direction: reverse;
-  -webkit-mask-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.5) 48%, transparent 100%);
-  mask-image: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0.5) 48%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    0deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.5) 48%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    0deg,
+    #000 0%,
+    rgba(0, 0, 0, 0.5) 48%,
+    transparent 100%
+  );
 }
 
 @keyframes flute-drift {
   from {
     background-position: 0 0;
   }
+
   to {
     background-position: 12vw 0;
   }
 }
 
-/* Slow blobs of colour */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -83,7 +101,11 @@
   height: 46vmax;
   left: -12vmax;
   top: 18%;
-  background: radial-gradient(circle, rgba(94, 174, 255, 0.55), transparent 65%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 155, 77, 0.42),
+    transparent 65%
+  );
   animation: orb-a 22s ease-in-out infinite alternate;
 }
 
@@ -92,7 +114,11 @@
   height: 40vmax;
   right: -10vmax;
   bottom: 4%;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.4), transparent 65%);
+  background: radial-gradient(
+    circle,
+    rgba(73, 203, 125, 0.38),
+    transparent 65%
+  );
   animation: orb-b 28s ease-in-out infinite alternate;
 }
 
@@ -108,13 +134,21 @@
   }
 }
 
-/* The pale light sheet that sits in the middle and keeps the text readable */
 .glass {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 52% at 50% 50%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.55) 55%, transparent 78%),
-    linear-gradient(180deg, rgba(233, 245, 255, 0) 55%, rgba(206, 232, 255, 0.55) 100%);
+    radial-gradient(
+      ellipse 70% 52% at 50% 50%,
+      rgba(255, 255, 255, 0.92),
+      rgba(244, 255, 248, 0.58) 55%,
+      transparent 78%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(234, 248, 240, 0) 55%,
+      rgba(205, 241, 218, 0.58) 100%
+    );
 }
 
 .grain {
@@ -136,9 +170,13 @@
   height: auto;
   margin-left: calc(min(30vw, 190px) / -2);
   margin-top: -300px;
-  filter: drop-shadow(0 18px 40px rgba(47, 123, 255, 0.35));
+  filter: drop-shadow(0 18px 40px rgba(0, 128, 68, 0.34));
   opacity: 0.9;
-  transform: translate3d(calc(var(--mx) * 14px), calc(var(--my) * 10px), 0);
+  transform: translate3d(
+    calc(var(--mx) * 14px),
+    calc(var(--my) * 10px),
+    0
+  );
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   animation: crystal-float 7s ease-in-out infinite;
   pointer-events: none;
@@ -150,6 +188,7 @@
     translate: 0 0;
     rotate: -1.2deg;
   }
+
   50% {
     translate: 0 -16px;
     rotate: 1.2deg;
@@ -171,7 +210,8 @@
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #0f1a24;
+  color: #063b29;
+  text-decoration: none;
 }
 
 /* ---------- content ---------- */
@@ -199,6 +239,7 @@
     transform: translateY(18px);
     filter: blur(6px);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -212,46 +253,46 @@
   gap: 8px;
   height: 30px;
   padding: 0 14px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 10px rgba(47, 123, 255, 0.12);
+  box-shadow: 0 2px 10px rgba(0, 110, 58, 0.12);
   backdrop-filter: blur(8px);
+  color: #4b675a;
   font-size: 12px;
-  color: #475569;
-  margin-bottom: 22px;
 }
 
 .pill strong {
+  color: #063b29;
   font-weight: 700;
-  color: #0f1a24;
 }
 
 .plus {
-  color: #0f1a24;
+  color: #009b4d;
   font-size: 13px;
 }
 
 .title {
-  font-size: clamp(38px, 7.2vw, 68px);
-  line-height: 1.02;
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  color: #0f1a24;
   max-width: 680px;
+  color: #063b29;
+  font-size: clamp(38px, 7.2vw, 68px);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
   text-wrap: balance;
 }
 
 .title span {
-  color: #6b7280;
+  color: #008c48;
 }
 
 .sub {
-  margin-top: 20px;
   max-width: 440px;
+  margin-top: 20px;
+  color: #365c49;
   font-size: 15px;
   line-height: 1.55;
-  color: #334155;
 }
 
 /* ---------- form ---------- */
@@ -268,16 +309,22 @@
   align-items: center;
   gap: 6px;
   padding: 5px;
-  border-radius: 9999px;
-  background: rgba(240, 243, 246, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 10px 30px rgba(47, 123, 255, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 9999px;
+  background: rgba(242, 250, 245, 0.94);
+  box-shadow:
+    0 10px 30px rgba(0, 108, 57, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .field:focus-within {
-  border-color: #3b82f6;
-  box-shadow: 0 10px 30px rgba(47, 123, 255, 0.22), 0 0 0 4px rgba(59, 130, 246, 0.18);
+  border-color: #009b4d;
+  box-shadow:
+    0 10px 30px rgba(0, 108, 57, 0.2),
+    0 0 0 4px rgba(0, 155, 77, 0.16);
 }
 
 .fieldError {
@@ -293,35 +340,37 @@
   border: 0;
   outline: 0;
   background: transparent;
+  color: #063b29;
   font: inherit;
   font-size: 14px;
-  color: #0f1a24;
 }
 
 .field input[type='email']::placeholder {
-  color: #94a3b8;
+  color: #7d9a88;
 }
 
 .field button {
+  display: inline-flex;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
   min-width: 116px;
   height: 44px;
   padding: 0 22px;
   border: 0;
   border-radius: 9999px;
-  background: #111418;
+  background: #063b29;
   color: #fff;
   font: inherit;
   font-size: 14px;
   font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .field button:hover:not(:disabled) {
-  background: #000;
+  background: #008c48;
   transform: translateY(-1px);
 }
 
@@ -335,7 +384,7 @@
 }
 
 .field button:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid #009b4d;
   outline-offset: 2px;
 }
 
@@ -351,9 +400,9 @@
 .spinner {
   width: 18px;
   height: 18px;
-  border-radius: 50%;
   border: 2.5px solid rgba(255, 255, 255, 0.35);
   border-top-color: #fff;
+  border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
 
@@ -365,14 +414,14 @@
 
 .error {
   margin-top: 10px;
-  font-size: 13px;
   color: #d32f2f;
+  font-size: 13px;
 }
 
 .fine {
   margin-top: 12px;
+  color: #527363;
   font-size: 12px;
-  color: #64748b;
 }
 
 /* ---------- success ---------- */
@@ -382,10 +431,10 @@
   max-width: 460px;
   margin-top: 30px;
   padding: 26px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 22px;
   background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.95);
-  box-shadow: 0 16px 44px rgba(47, 123, 255, 0.18);
+  box-shadow: 0 16px 44px rgba(0, 108, 57, 0.18);
   backdrop-filter: blur(14px);
 }
 
@@ -398,6 +447,7 @@
     opacity: 0;
     transform: scale(0.92) translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: none;
@@ -409,10 +459,10 @@
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background: #111418;
-  color: #fff;
   margin-bottom: 12px;
+  border-radius: 50%;
+  background: #063b29;
+  color: #fff;
 }
 
 .done h2 {
@@ -423,79 +473,55 @@
 
 .done p {
   margin-top: 6px;
+  color: #476b58;
   font-size: 14px;
   line-height: 1.5;
-  color: #475569;
   word-break: break-word;
 }
 
 .done strong {
-  color: #0f1a24;
+  color: #063b29;
 }
 
 .doneActions {
-  margin-top: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-top: 18px;
 }
 
 .ghost {
   height: 42px;
   padding: 0 20px;
+  border: 1px solid #b9d8c5;
   border-radius: 9999px;
-  border: 1px solid #cbd5e1;
   background: #fff;
+  color: #063b29;
   font: inherit;
   font-size: 13.5px;
   font-weight: 700;
-  color: #0f1a24;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ghost:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(15, 26, 36, 0.1);
+  box-shadow: 0 6px 16px rgba(6, 59, 41, 0.1);
 }
 
 .link {
   border: 0;
   background: none;
+  color: #476b58;
   font: inherit;
   font-size: 12.5px;
-  color: #475569;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-/* ---------- socials ---------- */
-
-.socials {
-  margin-top: 34px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px 10px;
-  font-size: 12.5px;
-  color: #334155;
-}
-
-.socials i {
-  margin-right: 10px;
-  font-style: normal;
-  color: #94a3b8;
-}
-
-.socials a {
-  transition: color 0.15s ease;
-}
-
-.socials a:hover {
-  color: #0f1a24;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+/* ---------- shared helpers ---------- */
 
 .srOnly {
   position: absolute;
@@ -504,6 +530,85 @@
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* ---------- floating glass shards and sparkles ---------- */
+
+.floaters {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.shard {
+  position: absolute;
+  left: var(--l);
+  top: var(--t);
+  width: var(--s);
+  height: calc(var(--s) * 1.6);
+  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(119, 222, 157, 0.72) 55%,
+    rgba(0, 126, 66, 0.44)
+  );
+  filter: drop-shadow(0 10px 18px rgba(0, 128, 68, 0.3));
+  opacity: 0.85;
+  animation: shard-float var(--v) ease-in-out var(--d) infinite;
+  will-change: transform;
+  transform: translate3d(
+    calc(var(--mx) * var(--s) * 0.25),
+    calc(var(--my) * var(--s) * 0.2),
+    0
+  );
+}
+
+@keyframes shard-float {
+  0%,
+  100% {
+    translate: 0 0;
+    rotate: -8deg;
+    scale: 1;
+  }
+
+  33% {
+    translate: 14px -26px;
+    rotate: 10deg;
+    scale: 1.08;
+  }
+
+  66% {
+    translate: -12px -10px;
+    rotate: -3deg;
+    scale: 0.94;
+  }
+}
+
+.spark {
+  position: absolute;
+  left: var(--l);
+  top: var(--t);
+  color: #009b4d;
+  font-size: 18px;
+  font-style: normal;
+  text-shadow: 0 0 14px rgba(0, 155, 77, 0.65);
+  animation: spark-twinkle 3.2s ease-in-out var(--d) infinite;
+}
+
+@keyframes spark-twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.6) rotate(0deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(45deg);
+  }
 }
 
 /* ---------- small screens ---------- */
@@ -526,8 +631,8 @@
 
   .field {
     flex-direction: column;
-    border-radius: 22px;
     padding: 6px;
+    border-radius: 22px;
   }
 
   .field input[type='email'] {
@@ -538,89 +643,11 @@
   .field button {
     width: 100%;
   }
-}
 
-/* ---------- floating glass shards and sparkles ---------- */
-
-.floaters {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.shard {
-  position: absolute;
-  left: var(--l);
-  top: var(--t);
-  width: var(--s);
-  height: calc(var(--s) * 1.6);
-  clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(125, 196, 255, 0.75) 55%, rgba(37, 99, 235, 0.45));
-  filter: drop-shadow(0 10px 18px rgba(37, 99, 235, 0.35));
-  opacity: 0.85;
-  animation: shard-float var(--v) ease-in-out var(--d) infinite;
-  will-change: transform;
-  transform: translate3d(calc(var(--mx) * var(--s) * 0.25), calc(var(--my) * var(--s) * 0.2), 0);
-}
-
-@keyframes shard-float {
-  0%,
-  100% {
-    translate: 0 0;
-    rotate: -8deg;
-    scale: 1;
-  }
-  33% {
-    translate: 14px -26px;
-    rotate: 10deg;
-    scale: 1.08;
-  }
-  66% {
-    translate: -12px -10px;
-    rotate: -3deg;
-    scale: 0.94;
-  }
-}
-
-.spark {
-  position: absolute;
-  left: var(--l);
-  top: var(--t);
-  font-style: normal;
-  font-size: 18px;
-  color: #3b82f6;
-  text-shadow: 0 0 14px rgba(59, 130, 246, 0.7);
-  animation: spark-twinkle 3.2s ease-in-out var(--d) infinite;
-}
-
-@keyframes spark-twinkle {
-  0%,
-  100% {
-    opacity: 0.15;
-    transform: scale(0.6) rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.25) rotate(45deg);
-  }
-}
-
-@media (max-width: 540px) {
   .shard {
     opacity: 0.6;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .shard,
-  .spark {
-    animation: none;
-  }
-}
-
-/* ---------- motion preferences ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   .flutes,
@@ -628,7 +655,9 @@
   .crystal,
   .rise,
   .pop,
-  .spinner {
+  .spinner,
+  .shard,
+  .spark {
     animation: none;
   }
 
