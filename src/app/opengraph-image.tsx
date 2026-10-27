@@ -4,7 +4,10 @@ export const alt = 'Jujo – sell more without big ad budgets. Join the waitlist
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await fetch(new URL('../../public/jujo-mark.png', import.meta.url)).then((res) => res.arrayBuffer());
+  const logoSrc = `data:image/png;base64,${Buffer.from(logo).toString('base64')}`;
+
   return new ImageResponse(
     (
       <div
@@ -21,22 +24,7 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 36 }}>
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 18,
-              background: '#111418',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 40,
-              fontWeight: 800,
-              color: '#ffffff',
-            }}
-          >
-            J
-          </div>
+          <img src={logoSrc} width={72} height={62} alt="" />
           <div style={{ fontSize: 36, fontWeight: 700 }}>Jujo</div>
         </div>
         <div style={{ fontSize: 74, fontWeight: 800, lineHeight: 1.04, letterSpacing: -2, maxWidth: 960 }}>

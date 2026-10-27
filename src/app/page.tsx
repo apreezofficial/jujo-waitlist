@@ -166,7 +166,7 @@ export default function WaitlistPage() {
 
       <header className={styles.top}>
         <Link href="/" className={styles.brand} aria-label="Jujo home">
-          <Image src="/jujo-mark.png" alt="" width={30} height={26} style={{ width: 30, height: 'auto' }} priority />
+          <Image src="/jujo-mark.png" alt="" width={40} height={34} style={{ width: 40, height: 'auto' }} priority />
           <span>Jujo</span>
         </Link>
       </header>
