@@ -37,7 +37,6 @@ export default async function OpenGraphImage() {
           fontFamily: 'sans-serif',
         }}
       >
-        {/* Decorative green shapes */}
         <div
           style={{
             position: 'absolute',
@@ -78,10 +77,10 @@ export default async function OpenGraphImage() {
         <div
           style={{
             position: 'relative',
+            width: '100%',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            width: '100%',
           }}
         >
           <div
@@ -127,15 +126,16 @@ export default async function OpenGraphImage() {
           >
             <div
               style={{
+                display: 'flex',
+                flexDirection: 'column',
                 fontSize: 74,
                 fontWeight: 800,
                 lineHeight: 1.03,
                 letterSpacing: -3,
               }}
             >
-              Grow your socials.
-              <br />
-              Turn leads into sales.
+              <span>Grow your socials.</span>
+              <span>Turn leads into sales.</span>
             </div>
 
             <div
