@@ -209,12 +209,12 @@ export default function WaitlistPage() {
           aria-labelledby="waitlist-title"
         >
           <span
-            className={`${styles.pill} ${styles.rise}`}
-            style={animationDelay('0s')}
-          >
-            <strong>Jujo</strong>
-            <span>Coming soon · 2026</span>
-          </span>
+  className={`${styles.pill} ${styles.rise}`}
+  style={animationDelay('0s')}
+>
+  <strong>Jujo</strong>
+  <span>Launching early November</span>
+</span>
 
           <h1
             id="waitlist-title"
