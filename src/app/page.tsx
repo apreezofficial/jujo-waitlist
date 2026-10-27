@@ -4,76 +4,24 @@ import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties, FormEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Sections from './Sections';
 import styles from './waitlist.module.css';
+import Sections from './Sections';
 
 type Status = 'idle' | 'sending' | 'done';
 
 const STORAGE_KEY = 'jujo.waitlist';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-const SHARDS = [
-  { left: '8%', top: '18%', size: '54px', delay: '0s' },
-  { left: '86%', top: '14%', size: '38px', delay: '1.2s' },
-  { left: '16%', top: '62%', size: '34px', delay: '0.6s' },
-  { left: '80%', top: '58%', size: '62px', delay: '2s' },
-  { left: '48%', top: '8%', size: '26px', delay: '1.6s' },
-  { left: '92%', top: '38%', size: '22px', delay: '0.3s' },
-];
-
-function Crystal() {
-  return (
-    <svg
-      className={styles.crystal}
-      viewBox="0 0 200 520"
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient id="wl-green-a" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#edfff5" stopOpacity="0.95" />
-          <stop offset="0.45" stopColor="#65d998" stopOpacity="0.8" />
-          <stop offset="1" stopColor="#008c48" stopOpacity="0.3" />
-        </linearGradient>
-
-        <linearGradient id="wl-green-b" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.85" />
-          <stop offset="1" stopColor="#00a854" stopOpacity="0.5" />
-        </linearGradient>
-      </defs>
-
-      <polygon
-        points="100,0 128,230 100,300 72,230"
-        fill="url(#wl-green-a)"
-      />
-      <polygon
-        points="100,0 128,230 100,300"
-        fill="url(#wl-green-b)"
-        opacity="0.6"
-      />
-      <polygon
-        points="100,520 116,300 100,262 84,300"
-        fill="url(#wl-green-a)"
-        opacity="0.7"
-      />
-      <polygon
-        points="0,262 82,246 100,262 82,278"
-        fill="url(#wl-green-b)"
-        opacity="0.55"
-      />
-      <polygon
-        points="200,262 118,246 100,262 118,278"
-        fill="url(#wl-green-b)"
-        opacity="0.55"
-      />
-    </svg>
-  );
+function animationDelay(delay: string): CSSProperties {
+  return { '--d': delay } as CSSProperties;
 }
 
 export default function WaitlistPage() {
-  const pageRef = useRef<HTMLElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const sendingRef = useRef(false);
-  const copiedTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
 
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState('');
@@ -91,45 +39,13 @@ export default function WaitlistPage() {
         setStatus('done');
       }
     } catch {
-      // The form remains available when storage is blocked.
+      // The form still works if local storage is blocked.
     }
 
     return () => {
-      if (copiedTimer.current) {
-        clearTimeout(copiedTimer.current);
+      if (copiedTimerRef.current !== null) {
+        clearTimeout(copiedTimerRef.current);
       }
-    };
-  }, []);
-
-  useEffect(() => {
-    const page = pageRef.current;
-
-    if (!page) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (!window.matchMedia('(hover: hover)').matches) return;
-
-    let frame = 0;
-
-    const onMove = (event: PointerEvent) => {
-      cancelAnimationFrame(frame);
-
-      frame = requestAnimationFrame(() => {
-        page.style.setProperty(
-          '--mx',
-          String((event.clientX / window.innerWidth - 0.5) * 2)
-        );
-        page.style.setProperty(
-          '--my',
-          String((event.clientY / window.innerHeight - 0.5) * 2)
-        );
-      });
-    };
-
-    window.addEventListener('pointermove', onMove, { passive: true });
-
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('pointermove', onMove);
     };
   }, []);
 
@@ -153,7 +69,9 @@ export default function WaitlistPage() {
     try {
       const response = await fetch('/api/waitlist', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({
           email: value,
           company,
@@ -181,7 +99,7 @@ export default function WaitlistPage() {
       try {
         window.localStorage.setItem(STORAGE_KEY, value);
       } catch {
-        // Confirmation still appears when storage is blocked.
+        // Show confirmation even when local storage is unavailable.
       }
 
       setEmail(value);
@@ -220,14 +138,16 @@ export default function WaitlistPage() {
       await navigator.clipboard.writeText(url);
       setCopied(true);
 
-      if (copiedTimer.current) {
-        clearTimeout(copiedTimer.current);
+      if (copiedTimerRef.current !== null) {
+        clearTimeout(copiedTimerRef.current);
       }
 
-      copiedTimer.current = setTimeout(() => setCopied(false), 2000);
+      copiedTimerRef.current = setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     } catch {
       setShareError(
-        'Could not copy the link. You can share this page from your browser.'
+        'Could not copy the link. Please share this page from your browser.'
       );
     }
   };
@@ -236,11 +156,11 @@ export default function WaitlistPage() {
     try {
       window.localStorage.removeItem(STORAGE_KEY);
     } catch {
-      // Allow another signup even if storage is unavailable.
+      // Allow another signup even when local storage is unavailable.
     }
 
-    if (copiedTimer.current) {
-      clearTimeout(copiedTimer.current);
+    if (copiedTimerRef.current !== null) {
+      clearTimeout(copiedTimerRef.current);
     }
 
     setError('');
@@ -249,83 +169,80 @@ export default function WaitlistPage() {
     setCompany('');
     setStatus('idle');
 
-    requestAnimationFrame(() => emailRef.current?.focus());
+    requestAnimationFrame(() => {
+      emailRef.current?.focus();
+    });
   };
 
   return (
     <>
-      <main id="top" ref={pageRef} className={styles.page}>
+      <main id="top" className={styles.page}>
         <div className={styles.backdrop} aria-hidden="true">
+          <div className={`${styles.flutes} ${styles.flutesTop}`} />
+          <div className={`${styles.flutes} ${styles.flutesBottom}`} />
           <div className={`${styles.orb} ${styles.orbA}`} />
           <div className={`${styles.orb} ${styles.orbB}`} />
-          <div className={styles.grid} />
-        </div>
-
-        <Crystal />
-
-        <div className={styles.floaters} aria-hidden="true">
-          {SHARDS.map((shard, index) => (
-            <span
-              key={index}
-              className={styles.shard}
-              style={
-                {
-                  '--left': shard.left,
-                  '--top': shard.top,
-                  '--size': shard.size,
-                  '--delay': shard.delay,
-                } as CSSProperties
-              }
-            />
-          ))}
+          <div className={styles.glass} />
+          <div className={styles.grain} />
         </div>
 
         <header className={styles.top}>
-          <Link href="/" className={styles.brand} aria-label="Jujo home">
+          <Link
+            href="/"
+            className={styles.brand}
+            aria-label="Jujo home"
+          >
             <Image
               src="/jujo-mark.png"
               alt=""
-              width={40}
-              height={34}
-              style={{ width: 40, height: 'auto' }}
+              width={30}
+              height={26}
+              style={{ width: 30, height: 'auto' }}
               priority
             />
             <span>Jujo</span>
           </Link>
         </header>
 
-        <section className={styles.center} aria-labelledby="waitlist-title">
-          <span className={`${styles.pill} ${styles.rise}`}>
+        <section
+          className={styles.center}
+          aria-labelledby="waitlist-title"
+        >
+          <span
+            className={`${styles.pill} ${styles.rise}`}
+            style={animationDelay('0s')}
+          >
             <strong>Jujo</strong>
-            <span className={styles.plus} aria-hidden="true">
-              ✦
-            </span>
             <span>Coming soon · 2026</span>
           </span>
 
           <h1
             id="waitlist-title"
             className={`${styles.title} ${styles.rise}`}
+            style={animationDelay('0.08s')}
           >
-            Growth is coming.
-            <span>Built for Nigerian businesses.</span>
+            You don&apos;t need to waste money{' '}
+            <span>on advertising.</span>
           </h1>
 
-          <p className={`${styles.sub} ${styles.rise}`}>
-            Don&apos;t miss out. Stay close to the launch of Jujo, the AI
-            partner that helps you reach the right customers.
+          <p
+            className={`${styles.sub} ${styles.rise}`}
+            style={animationDelay('0.18s')}
+          >
+            Don&apos;t miss out. Stay close to the launch of Jujo, the
+            AI partner that helps you reach the right customers.
           </p>
 
           {status === 'done' ? (
             <div
-              className={`${styles.done} ${styles.rise}`}
+              className={`${styles.done} ${styles.pop}`}
               role="status"
               aria-live="polite"
             >
               <span className={styles.tick} aria-hidden="true">
                 <svg
-                  width="22"
-                  height="22"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -340,8 +257,8 @@ export default function WaitlistPage() {
               <h2>You&apos;re on the list</h2>
 
               <p>
-                We&apos;ll email <strong>{email}</strong> the moment Jujo
-                opens.
+                We&apos;ll email <strong>{email}</strong> the moment
+                Jujo opens.
               </p>
 
               <div className={styles.doneActions}>
@@ -363,7 +280,10 @@ export default function WaitlistPage() {
               </div>
 
               {shareError && (
-                <p className={styles.error} role="alert">
+                <p
+                  role="alert"
+                  style={{ color: '#b42318', marginTop: 12 }}
+                >
                   {shareError}
                 </p>
               )}
@@ -371,6 +291,7 @@ export default function WaitlistPage() {
           ) : (
             <form
               className={`${styles.form} ${styles.rise}`}
+              style={animationDelay('0.28s')}
               onSubmit={submit}
               aria-busy={status === 'sending'}
               noValidate
@@ -380,7 +301,10 @@ export default function WaitlistPage() {
                   error ? styles.fieldError : ''
                 }`}
               >
-                <label htmlFor="wl-email" className={styles.srOnly}>
+                <label
+                  htmlFor="wl-email"
+                  className={styles.srOnly}
+                >
                   Your email address
                 </label>
 
@@ -399,12 +323,16 @@ export default function WaitlistPage() {
                   required
                   onChange={(event) => {
                     setEmail(event.target.value);
-                    if (error) setError('');
+
+                    if (error) {
+                      setError('');
+                    }
                   }}
                   aria-invalid={Boolean(error)}
                   aria-describedby={error ? 'wl-error' : undefined}
                 />
 
+                {/* Honeypot field for spam prevention. */}
                 <input
                   className={styles.trap}
                   type="text"
@@ -413,19 +341,37 @@ export default function WaitlistPage() {
                   autoComplete="off"
                   aria-hidden="true"
                   value={company}
-                  onChange={(event) => setCompany(event.target.value)}
+                  onChange={(event) => {
+                    setCompany(event.target.value);
+                  }}
                 />
 
-                <button type="submit" disabled={status === 'sending'}>
-                  {status === 'sending' && (
-                    <span className={styles.spinner} aria-hidden="true" />
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? (
+                    <>
+                      <span
+                        className={styles.spinner}
+                        aria-hidden="true"
+                      />
+                      <span className={styles.srOnly}>
+                        Joining the waitlist
+                      </span>
+                    </>
+                  ) : (
+                    'Get Notified'
                   )}
-                  {status === 'sending' ? 'Joining…' : 'Get Notified'}
                 </button>
               </div>
 
               {error && (
-                <p id="wl-error" className={styles.error} role="alert">
+                <p
+                  id="wl-error"
+                  className={styles.error}
+                  role="alert"
+                >
                   {error}
                 </p>
               )}
