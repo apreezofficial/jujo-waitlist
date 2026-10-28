@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { redirect } from 'next/navigation';
 import { isAdmin } from '../../lib/admin-auth';
 import { getWaitlistSubmissions } from '../../lib/voieform';
+import AdminBoard from './AdminBoard';
 import styles from './admin.module.css';
 
 export const metadata: Metadata = {
@@ -12,14 +13,6 @@ export const metadata: Metadata = {
     follow: false,
   },
 };
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en-NG', {
-    dateStyle: 'medium',
-    timeStyle: 'short',
-    timeZone: 'Africa/Lagos',
-  }).format(new Date(value));
-}
 
 export default async function AdminPage() {
   if (!(await isAdmin())) {
@@ -93,27 +86,14 @@ export default async function AdminPage() {
             <p>When someone joins the waitlist, their email will appear here.</p>
           </div>
         ) : (
-          <section className={styles.tableCard}>
-            <div className={styles.tableHeading}>
-              <span>Email address</span>
-              <span>Joined</span>
-              <span>Source</span>
-            </div>
-
-            <div className={styles.rows}>
-              {submissions.map((submission) => (
-                <div className={styles.row} key={submission.id}>
-                  <strong>{submission.fields.email ?? 'No email provided'}</strong>
-
-                  <span>{formatDate(submission.created_at)}</span>
-
-                  <span className={styles.source}>
-                    {submission.fields.source ?? 'waitlist-page'}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </section>
+          <AdminBoard
+            entries={submissions.map((submission) => ({
+              id: submission.id,
+              email: submission.fields.email ?? 'No email provided',
+              createdAt: submission.created_at,
+              source: submission.fields.source ?? 'waitlist-page',
+            }))}
+          />
         )}
       </section>
     </main>
